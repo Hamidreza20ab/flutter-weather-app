@@ -6,6 +6,30 @@ class CurrentWeatherWidget extends StatelessWidget {
   final WeatherDataCurrent weatherDataCurrent;
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //Temprature area
+        tempratureAreaWidget(),
+        //more details-windspeed, humadity, clouds
+        currentWeatherMoreDetailsWidget(),
+      ],
+    );
+  }
+
+  Widget currentWeatherMoreDetailsWidget() {
     return Container();
+  }
+
+  Widget tempratureAreaWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Image.asset(
+          'assets/weather/${weatherDataCurrent.current.weather![0].icon}.png',
+          height: 80,
+          width: 80,
+        )
+      ],
+    );
   }
 }
