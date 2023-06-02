@@ -8,8 +8,8 @@ class GlobalController extends GetxController {
   final RxDouble _longitude = 0.0.obs;
   //instance for them to be called
   RxBool checkLoading() => _isloading;
-  RxDouble checkLatitude() => _lattitude;
-  RxDouble checkLonitude() => _longitude;
+  RxDouble getLatitude() => _lattitude;
+  RxDouble getLongitude() => _longitude;
   @override
   void onInit() {
     if (_isloading.isTrue) {
@@ -30,7 +30,7 @@ class GlobalController extends GetxController {
     //status of permission
     locationPermission = await Geolocator.checkPermission();
     if (locationPermission == LocationPermission.deniedForever) {
-      return Future.error("Location Permission are denied forever");
+      return Future.error("Location Permissions are denied forever");
     } else if (locationPermission == LocationPermission.denied) {
       //request permission
       locationPermission = await Geolocator.requestPermission();
