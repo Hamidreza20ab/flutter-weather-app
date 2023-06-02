@@ -2,6 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weatherapp/api/fetch_weather.dart';
 import 'package:weatherapp/model/weather_data.dart';
+import 'package:weatherapp/model/weather_data_current.dart';
 
 class GlobalController extends GetxController {
   //create variable values
@@ -12,6 +13,10 @@ class GlobalController extends GetxController {
   RxBool checkLoading() => _isloading;
   RxDouble getLatitude() => _lattitude;
   RxDouble getLongitude() => _longitude;
+  final weatherData = WeatherData().obs;
+  WeatherData getWeatherData() {
+    return weatherData.value;
+  }
 
   @override
   void onInit() {
@@ -52,6 +57,7 @@ class GlobalController extends GetxController {
         return FetchWeatherApi()
             .processData(value.latitude, value.longitude)
             .then((value) {
+          weatherData.value = value;
           _isloading.value = false;
         });
       });
